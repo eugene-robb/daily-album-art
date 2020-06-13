@@ -63,7 +63,7 @@ export const Footer = (props) => {
 
         <h3>Links</h3>
         <ul>
-          <li><a href="">About</a></li>
+          {/* <li><a href="">About</a></li> */}
           <li><a href="https://twitter.com/eugene_robb" target="_blank" rel="noopener noreferrer" title="Hit me up on Twitter!">Twitter</a></li>
           <li><a href="https://github.com/eugene-robb" target="_blank" rel="noopener noreferrer" title="Have a look my GitHub">GitHub</a></li>
         </ul>
