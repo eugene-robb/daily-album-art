@@ -6,10 +6,10 @@ export const Direction = (props) => {
   let icon = "";
   let divStyle = {};
   if (props.direction === "Next") {
-    icon = <NavigateNext size={35} />;
+    icon = <NavigateNext size={40} />;
     divStyle = { justifySelf: "end" };
   } else {
-    icon = <NavigateBefore size={35} />;
+    icon = <NavigateBefore size={40} />;
   }
 
   const handleDirectionClick = () => {
@@ -18,7 +18,7 @@ export const Direction = (props) => {
 
   return (
     <div style={divStyle}>
-      <button onClick={handleDirectionClick}>{icon}</button>;
+      <button onClick={handleDirectionClick}>{icon}</button>
     </div>
   );
 };

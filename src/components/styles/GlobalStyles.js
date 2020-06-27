@@ -7,10 +7,20 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Helvetica, Arial, sans-serif;
   }
 
-
   button {
-    background-color: #FFFFFF;
+    background-color: transparent;
     border: none;
-  }
+    color: gainsboro;
+    transition: all 0.3s ease 0s;
+
+    
+    &:hover{
+      color: white;
+    }
+
+    &:focus{
+      outline:none;
+    }
+  } 
 
 `;

@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { Shuffle } from "@styled-icons/entypo/Shuffle";
 import styled from "styled-components";
 
-const RandomButton = styled(Shuffle)`
-  background-color: white;
+const RandomButton = styled.button`
   grid-area: random;
   justify-self: end;
+  align-self: start;
   margin-top: 10px;
   margin-right: 10px;
+
+  @media (max-width: 768px) {
+    margin: 0;
+  }
 `;
 
 export const Random = ({
@@ -15,7 +19,7 @@ export const Random = ({
   today,
   handleUpdateAlbum,
   handleDirectionDisplay,
-  setBackDisplay
+  setBackDisplay,
 }) => {
   const albumArray = [...Array(parseInt(total)).keys()];
 
@@ -45,5 +49,9 @@ export const Random = ({
     handleUpdateAlbum(newRandomAlbum[0]);
   };
 
-  return <RandomButton size={35} onClick={handleRandomAlbum} />;
+  return (
+    <RandomButton>
+      <Shuffle size={35} onClick={handleRandomAlbum} />
+    </RandomButton>
+  );
 };

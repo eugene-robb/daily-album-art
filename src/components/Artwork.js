@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
 
 import { GET_ALBUM_QUERY } from "../queries/queries";
+import { Loading } from "./Loading";
 
 const ArtworkStyles = styled.div`
   grid-area: main;
@@ -13,7 +14,8 @@ const ArtworkStyles = styled.div`
 
   section {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: ${(props) =>
+      props.displayDirection ? "1fr 4fr 1fr" : "auto"};
     align-items: center;
     background-image: linear-gradient(
         to bottom,
@@ -25,13 +27,35 @@ const ArtworkStyles = styled.div`
     padding: 50px 0;
   }
 
-  .hidden {
-    grid-template-columns: auto;
-  }
-
   img {
     border: solid black 2px;
     justify-self: center;
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media (max-width: 768px) {
+    section {
+      padding: 0;
+    }
+
+    img {
+      grid-row: 1;
+      grid-column: 1 / span 3;
+      border: none;
+      border-bottom: solid black 2px;
+    }
+
+    section > div:nth-child(1) {
+      grid-row: 1;
+      grid-column: 1;
+      z-index: 1;
+    }
+
+    section > div:nth-child(3) {
+      grid-row: 1;
+      grid-column: 3;
+    }
   }
 `;
 
@@ -62,7 +86,7 @@ export const Artwork = ({
     variables: { display },
   });
 
-  if (loading) return <div>Fetching new album...</div>;
+  if (loading) return <Loading/>;
 
   const {
     artist,
@@ -94,10 +118,8 @@ export const Artwork = ({
   };
 
   return (
-    <ArtworkStyles url={img_large}>
-      <section
-        className={displayDirections ? "directions" : "directions hidden"}
-      >
+    <ArtworkStyles displayDirection={displayDirections} url={img_large}>
+      <section>
         {!isPreviousHidden && (
           <Direction handleDirection={handleDirection} direction="Previous" />
         )}
