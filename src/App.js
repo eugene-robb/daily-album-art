@@ -4,17 +4,17 @@ import { ApolloProvider } from "@apollo/react-hooks";
 
 import { Footer } from "./components/Footer";
 import { Main } from "./components/Main.js";
-import { GlobalStyles } from "./components/styles/GlobalStyles"
+import { GlobalStyles } from "./components/styles/GlobalStyles";
 
 //apollo client setup
 const client = new ApolloClient({
-  uri: "http://localhost:3001/graphql",
+  uri: "/graphql",
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <GlobalStyles/>
+      <GlobalStyles />
       <Main />
       <Footer />
     </ApolloProvider>
