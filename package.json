@@ -1,48 +1,23 @@
 {
-  "name": "daily-album-art",
-  "description": "A different album art every day..",
-  "author": "Eugene Robb <eugenerobb@outlook.com>",
-  "version": "0.1.0",
-  "dependencies": {
-    "@apollo/react-hooks": "^3.1.5",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "apollo-boost": "^0.4.9",
-    "axios": "^0.19.2",
-    "concurrently": "^5.2.0",
-    "graphql": "^15.0.0",
-    "graphql-tag": "^2.10.3",
-    "moment": "^2.26.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1",
-    "styled-components": "^5.1.1",
-    "styled-icons": "^10.2.1"
-  },
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && mv build ./server/public",
-    "heroku-postbuild": "npm install && npm run build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "server": "npm start --prefix server",
-    "dev": "concurrently \"npm run server\" \"npm start\""
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://localhost:3001"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.0.0",
+    "node-fetch": "^2.6.0"
+  }
 }
