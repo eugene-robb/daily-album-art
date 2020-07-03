@@ -18,10 +18,11 @@ app.use(
   })
 );
 
-app.use(express.static("public"));
+app.use(express.static("build"));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+app.get("*", function (req, res) {
+  const index = path.join(__dirname, "build", "index.html");
+  res.sendFile(index);
 });
 
 app.listen(PORT, () => {
