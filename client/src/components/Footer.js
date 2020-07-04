@@ -59,17 +59,18 @@ export const Footer = (props) => {
           <i>Daily Album Art</i> is a website which displays cool and/or
           interesting album art. Each day, a new album art is generated along
           with a little info about the album itself. The album art is curated by
-          me so what the hell do I know? I'm just an idiot who listens to music
-          when I build websites so I thought... why not combine the two? Anyway,
-          the site is powered by the{" "}
+          me but what the hell do I know? I'm just an idiot who listens to music
+          when I build websites so I thought... why not combine the two? The
+          site is powered by the{" "}
           <a
             href="https://developer.spotify.com/documentation/web-api/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Spotify API
+            Spotify Web API
           </a>
-          &nbsp;and if you wanna take a look at the code, you can find that on my{" "}
+          &nbsp;and if you wanna take a look at the code, you can find that on
+          my{" "}
           <a
             href="https://github.com/eugene-robb/daily-album-art"
             target="_blank"
@@ -77,8 +78,8 @@ export const Footer = (props) => {
           >
             GitHub
           </a>
-          . Enough of this chitchat, why not hit that shuffle button and take
-          this baby for a spin?
+          . Anyway, enough of this chitchat, go ahead and hit that shuffle button and take
+          this baby for a spin.
         </p>
         <p>Because album art is cool, right?</p>
       </div>
