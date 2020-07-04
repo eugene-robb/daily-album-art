@@ -3,6 +3,7 @@ import { Direction } from "./Direction";
 import { Spotify } from "@styled-icons/boxicons-logos/Spotify";
 import { useQuery } from "@apollo/react-hooks";
 import styled from "styled-components";
+import moment from "moment";
 
 import { GET_ALBUM_QUERY } from "../queries/queries";
 import { Loading } from "./Loading";
@@ -36,6 +37,23 @@ const ArtworkStyles = styled.div`
 
   article {
     text-align: center;
+    margin: 0 10%;
+
+    h4 {
+      font-size: 16px;
+      color: #5d5d5d;
+      padding: 0;
+      margin: 15px 0 2px 0;
+    }
+
+    h3 {
+      border-bottom: 1px solid #000;
+      border-top: 1px solid #000;
+      padding: 7px 0;
+      font-style: italic;
+      font-weight: normal;
+      color: red;
+    }
   }
 
   @media (max-width: 768px) {
@@ -71,7 +89,10 @@ export const Artwork = ({
   display,
   today,
   handleUpdateAlbum,
+  todaysAlbumDate,
   displayDirections,
+  isDateDisplay,
+  handleUpdateDisplayDate,
 }) => {
   const [isPreviousHidden, setPreviousHidden] = useState(false);
   const [isNextHidden, setNextHidden] = useState(true);
@@ -105,6 +126,7 @@ export const Artwork = ({
     if (direction === "Previous") {
       setNextHidden(false);
       handleUpdateAlbum(display - 1);
+      handleUpdateDisplayDate(moment(todaysAlbumDate).subtract(1, "days"));
 
       if (display === 1) {
         setPreviousHidden(true);
@@ -114,6 +136,7 @@ export const Artwork = ({
     if (direction === "Next") {
       setPreviousHidden(false);
       handleUpdateAlbum(display + 1);
+      handleUpdateDisplayDate(moment(todaysAlbumDate).add(1, "days"));
 
       if (display === today - 1) {
         setNextHidden(true);
@@ -124,8 +147,10 @@ export const Artwork = ({
   return (
     <ArtworkStyles displayDirection={displayDirections} url={img_large}>
       <section>
-        {!isPreviousHidden && (
+        {!isPreviousHidden ? (
           <Direction handleDirection={handleDirection} direction="Previous" />
+        ) : (
+          <div />
         )}
         <img alt={album} src={img_large} />
         {!isNextHidden && (
@@ -133,9 +158,10 @@ export const Artwork = ({
         )}
       </section>
       <article>
+        {isDateDisplay && <h4>{todaysAlbumDate.format("MMMM DD")}</h4>}
         <h1>{album}</h1>
         <h3>{artist}</h3>
-        <p>Release date: {release_date}</p>
+        <p>{release_date}</p>
         <p>Total Tracks: {total_tracks}</p>
         <a href={url} target="_blank" rel="noopener noreferrer">
           <SpotifyIcon size={45} />

@@ -19,6 +19,7 @@ export const Random = ({
   today,
   handleUpdateAlbum,
   handleDirectionDisplay,
+  handleDisplayDate,
   setBackDisplay,
 }) => {
   const albumArray = [...Array(parseInt(total)).keys()];
@@ -30,6 +31,7 @@ export const Random = ({
 
   const handleRandomAlbum = () => {
     handleDirectionDisplay(false);
+    handleDisplayDate(false);
     // setBackDisplay(true)
 
     const newTotalAlbumList = [...totalAlbumList];

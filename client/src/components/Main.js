@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { Back } from "@styled-icons/entypo/Back";
 import styled from "styled-components";
@@ -29,15 +29,18 @@ const BackButton = styled.button`
 `;
 
 export const Main = () => {
-  const FROM_DATE = moment("13-05-2020", "DD-MM-YYYY");
+  const FROM_DATE = moment("01-07-2020", "DD-MM-YYYY");
   const CURRENT_DATE = moment().startOf("day");
   const today = moment.duration(CURRENT_DATE.diff(FROM_DATE)).asDays();
   const [DISPLAY_DATE, setDisplayDate] = useState(today);
   const [isDisplayDirections, setDisplayDirections] = useState(true);
   const [isBackDisplay, setBackDisplay] = useState(false);
+  const [isForwardDisplay, setForwardDisplay] = useState(false);
+  const [isDateDisplay, setDateDisplay] = useState(true);
+  const [todaysAlbumDate, setTodaysAlbumDate] = useState(moment());
 
   const { data, loading, error } = useQuery(GET_PLAYLIST_TOTAL);
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
   if (error) return <p>Error :(</p>;
 
   const handleUpdateAlbum = (newAlbum) => {
@@ -48,6 +51,14 @@ export const Main = () => {
     setDisplayDate(newAlbum);
   };
 
+  const handleUpdateDisplayDate = (newDate) => {
+    setTodaysAlbumDate(newDate);
+  };
+
+  const handleDisplayDate = () => {
+    setDateDisplay(false);
+  };
+
   const handleDirectionDisplay = (shouldDisplay) => {
     setDisplayDirections(shouldDisplay);
   };
@@ -56,14 +67,19 @@ export const Main = () => {
     handleUpdateAlbum(today);
     handleDirectionDisplay(true);
     setBackDisplay(false);
+    setDateDisplay(true);
+    setTodaysAlbumDate(moment());
   };
 
   return (
     <MainStyles>
       <Artwork
         handleUpdateAlbum={handleUpdateAlbum}
+        todaysAlbumDate={todaysAlbumDate}
         display={DISPLAY_DATE}
         today={today}
+        handleUpdateDisplayDate={handleUpdateDisplayDate}
+        isDateDisplay={isDateDisplay}
         displayDirections={isDisplayDirections}
       />
       {isBackDisplay && (
@@ -74,6 +90,7 @@ export const Main = () => {
       <Random
         handleUpdateAlbum={handleUpdateAlbum}
         handleDirectionDisplay={handleDirectionDisplay}
+        handleDisplayDate={handleDisplayDate}
         display={DISPLAY_DATE}
         today={today}
         total={data.playlist.playlist_total}
