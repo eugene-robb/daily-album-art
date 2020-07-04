@@ -34,6 +34,10 @@ const ArtworkStyles = styled.div`
     height: auto;
   }
 
+  article {
+    text-align: center;
+  }
+
   @media (max-width: 768px) {
     section {
       padding: 0;
@@ -86,7 +90,7 @@ export const Artwork = ({
     variables: { display },
   });
 
-  if (loading) return <Loading/>;
+  if (loading) return <Loading />;
 
   const {
     artist,
@@ -128,13 +132,15 @@ export const Artwork = ({
           <Direction handleDirection={handleDirection} direction="Next" />
         )}
       </section>
-      <h1>{album}</h1>
-      <h3>{artist}</h3>
-      <p>Release date: {release_date}</p>
-      <p>Total Tracks: {total_tracks}</p>
-      <a href={url} target="_blank" rel="noopener noreferrer">
-        <SpotifyIcon size={45} />
-      </a>
+      <article>
+        <h1>{album}</h1>
+        <h3>{artist}</h3>
+        <p>Release date: {release_date}</p>
+        <p>Total Tracks: {total_tracks}</p>
+        <a href={url} target="_blank" rel="noopener noreferrer">
+          <SpotifyIcon size={45} />
+        </a>
+      </article>
     </ArtworkStyles>
   );
 };

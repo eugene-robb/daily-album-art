@@ -9,13 +9,13 @@ const FooterStyles = styled.footer`
 
   background-color: #262626;
   color: #5d5d5d;
-  padding: 33px 35px 0 45px;
+  padding: 33px 22px 0 22px;
   line-height: 30px;
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-template-rows: auto 1fr;
   justify-items: center;
-  margin-top: 45px;
+  margin-top: 35px;
 
   .copy{
     margin-top: 35px;
