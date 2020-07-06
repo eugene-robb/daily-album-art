@@ -8,7 +8,7 @@ const retrieveRelevantData = (response) => {
       album: album.name,
       total_tracks: album.total_tracks,
       release_date: album.release_date,
-      url: album.artists[0].external_urls.spotify,
+      url: album.external_urls.spotify,
       img_large: album.images[0].url,
     };
   } else {
