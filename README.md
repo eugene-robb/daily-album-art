@@ -1,5 +1,6 @@
 # Daily Album Art
-Currently in progress but the elevator pitch is that this app generates a new album art every day. Links up with the Spotify API to do so.
+Web app generates a new album art every day. Links up with the Spotify API to do so.
+https://daily-album-art.herokuapp.com/
 
 #### Tech stack:
 + React
