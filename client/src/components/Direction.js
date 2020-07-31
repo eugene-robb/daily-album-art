@@ -5,7 +5,7 @@ import { NavigateBefore } from "@styled-icons/material/NavigateBefore";
 export const Direction = (props) => {
   let icon = "";
   let divStyle = {};
-  if (props.direction === "Next") {
+  if (props.direction === "forward") {
     icon = <NavigateNext size={40} />;
     divStyle = { justifySelf: "end" };
   } else {

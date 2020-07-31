@@ -33,19 +33,28 @@ export const Main = () => {
   const CURRENT_DATE = moment().startOf("day");
   const today = moment.duration(CURRENT_DATE.diff(FROM_DATE)).asDays();
   const [DISPLAY_DATE, setDisplayDate] = useState(today);
-  const [isDisplayDirections, setDisplayDirections] = useState(true);
-  const [isBackDisplay, setBackDisplay] = useState(false);
-  const [isForwardDisplay, setForwardDisplay] = useState(false);
   const [isDateDisplay, setDateDisplay] = useState(true);
   const [todaysAlbumDate, setTodaysAlbumDate] = useState(moment());
+  const [showButton, setShowButton] = useState({
+    previous: true,
+    forward: false,
+    back: false,
+  });
 
   const { data, loading, error } = useQuery(GET_PLAYLIST_TOTAL);
   if (loading) return <Loading />;
   if (error) return <p>Error :(</p>;
 
+  const handleButtonDisplay = (buttonName, display) => {
+    setShowButton(previousState => ({
+      ...previousState,
+      [buttonName]: display
+    }))
+  }
+
   const handleUpdateAlbum = (newAlbum) => {
     if (newAlbum !== today) {
-      setBackDisplay(true);
+      handleButtonDisplay('back', true)
     }
     console.log(newAlbum);
     setDisplayDate(newAlbum);
@@ -59,14 +68,11 @@ export const Main = () => {
     setDateDisplay(false);
   };
 
-  const handleDirectionDisplay = (shouldDisplay) => {
-    setDisplayDirections(shouldDisplay);
-  };
-
   const handleBack = () => {
     handleUpdateAlbum(today);
-    handleDirectionDisplay(true);
-    setBackDisplay(false);
+    handleButtonDisplay('back', false)
+    handleButtonDisplay('forward', false)
+    handleButtonDisplay('previous', true)
     setDateDisplay(true);
     setTodaysAlbumDate(moment());
   };
@@ -80,16 +86,17 @@ export const Main = () => {
         today={today}
         handleUpdateDisplayDate={handleUpdateDisplayDate}
         isDateDisplay={isDateDisplay}
-        displayDirections={isDisplayDirections}
+        handleButtonDisplay={handleButtonDisplay}
+        showButton={showButton}
       />
-      {isBackDisplay && (
+      {showButton.back && (
         <BackButton onClick={handleBack}>
           <Back size={35} />
         </BackButton>
       )}
       <Random
         handleUpdateAlbum={handleUpdateAlbum}
-        handleDirectionDisplay={handleDirectionDisplay}
+        handleButtonDisplay={handleButtonDisplay}
         handleDisplayDate={handleDisplayDate}
         display={DISPLAY_DATE}
         today={today}

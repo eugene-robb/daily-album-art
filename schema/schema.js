@@ -1,13 +1,7 @@
 const graphql = require("graphql");
 const getAlbum = require("../functions/getAlbumData");
 
-const {
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLID,
-  GraphQLSchema,
-  GraphQLList,
-} = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLSchema } = graphql;
 
 const AlbumType = new GraphQLObjectType({
   name: "Album",
@@ -27,8 +21,6 @@ const PlaylistType = new GraphQLObjectType({
     playlist_total: { type: GraphQLString },
   }),
 });
-
-
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQueryType",

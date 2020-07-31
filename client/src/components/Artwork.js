@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Direction } from "./Direction";
 import { Spotify } from "@styled-icons/boxicons-logos/Spotify";
 import { useQuery } from "@apollo/react-hooks";
@@ -15,8 +15,7 @@ const ArtworkStyles = styled.div`
 
   section {
     display: grid;
-    grid-template-columns: ${(props) =>
-      props.displayDirection ? "1fr 4fr 1fr" : "auto"};
+    grid-template-columns: 1fr 4fr 1fr;
     align-items: center;
     background-image: linear-gradient(
         to bottom,
@@ -90,23 +89,11 @@ export const Artwork = ({
   today,
   handleUpdateAlbum,
   todaysAlbumDate,
-  displayDirections,
   isDateDisplay,
   handleUpdateDisplayDate,
+  handleButtonDisplay,
+  showButton,
 }) => {
-  const [isPreviousHidden, setPreviousHidden] = useState(false);
-  const [isNextHidden, setNextHidden] = useState(true);
-
-  useEffect(() => {
-    if (!displayDirections) {
-      setPreviousHidden(true);
-      setNextHidden(true);
-    } else {
-      setPreviousHidden(false);
-      setNextHidden(true);
-    }
-  }, [displayDirections]);
-
   const { data, loading } = useQuery(GET_ALBUM_QUERY, {
     variables: { display },
   });
@@ -124,37 +111,38 @@ export const Artwork = ({
 
   const handleDirection = (direction) => {
     if (direction === "Previous") {
-      setNextHidden(false);
+      handleButtonDisplay("forward", true);
       handleUpdateAlbum(display - 1);
       handleUpdateDisplayDate(moment(todaysAlbumDate).subtract(1, "days"));
 
       if (display === 1) {
-        setPreviousHidden(true);
+        handleButtonDisplay("previous", false);
       }
     }
 
-    if (direction === "Next") {
-      setPreviousHidden(false);
+    if (direction === "forward") {
+      handleButtonDisplay("previous", true);
       handleUpdateAlbum(display + 1);
       handleUpdateDisplayDate(moment(todaysAlbumDate).add(1, "days"));
 
       if (display === today - 1) {
-        setNextHidden(true);
+        handleButtonDisplay("forward", false);
+        handleButtonDisplay("back", false);
       }
     }
   };
 
   return (
-    <ArtworkStyles displayDirection={displayDirections} url={img_large}>
+    <ArtworkStyles url={img_large}>
       <section>
-        {!isPreviousHidden ? (
+        {showButton.previous ? (
           <Direction handleDirection={handleDirection} direction="Previous" />
         ) : (
           <div />
         )}
         <img alt={album} src={img_large} />
-        {!isNextHidden && (
-          <Direction handleDirection={handleDirection} direction="Next" />
+        {showButton.forward && (
+          <Direction handleDirection={handleDirection} direction="forward" />
         )}
       </section>
       <article>
