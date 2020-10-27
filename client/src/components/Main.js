@@ -31,7 +31,7 @@ const BackButton = styled.button`
 export const Main = () => {
   const FROM_DATE = moment("01-07-2020", "DD-MM-YYYY");
   const CURRENT_DATE = moment().startOf("day");
-  const today = moment.duration(CURRENT_DATE.diff(FROM_DATE)).asDays();
+  const today = moment.duration(CURRENT_DATE.diff(FROM_DATE)).days();
   const [DISPLAY_DATE, setDisplayDate] = useState(today);
   const [isDateDisplay, setDateDisplay] = useState(true);
   const [todaysAlbumDate, setTodaysAlbumDate] = useState(moment());
